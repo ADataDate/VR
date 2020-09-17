@@ -18,6 +18,7 @@ public class DirtDevil_manager : MonoBehaviour
     public float theatOffset = 1; //
     public float spinSpeedOffset = 10;
     public float expandOffset = 0;
+    public float sizeOffset = 0; 
 
 
  
@@ -38,7 +39,8 @@ public class DirtDevil_manager : MonoBehaviour
             devils[i].GetComponent<DirtDevil_controller>().theta = UnityEngine.Random.Range(0, 360);
             devils[i].GetComponent<DirtDevil_controller>().spinSpeed = spinSpeedOffset + UnityEngine.Random.Range(-5, 5);
             devils[i].GetComponent<DirtDevil_controller>().height = devilHeight + UnityEngine.Random.Range(devilHeight+devilHeight*.2f, devilHeight - devilHeight * .2f);
-            devils[i].GetComponent<DirtDevil_controller>().expand = expandOffset + UnityEngine.Random.Range(expandOffset + expandOffset * .1f, expandOffset - expandOffset * .1f);
+            devils[i].GetComponent<DirtDevil_controller>().expandSpeed = expandOffset + UnityEngine.Random.Range(expandOffset + expandOffset * .1f, expandOffset - expandOffset * .1f);
+            devils[i].GetComponent<DirtDevil_controller>().size = sizeOffset + UnityEngine.Random.Range(sizeOffset + sizeOffset * .05f, sizeOffset - sizeOffset * .05f);
 
 
 
