@@ -12,7 +12,7 @@ public class DirtDevil_controller : MonoBehaviour
     public float theta = 0;
     public float rise = 0.01f;
     public float expand;
-    public float size;
+    public float size=0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +28,17 @@ public class DirtDevil_controller : MonoBehaviour
         theta += Time.deltaTime * spinSpeed; //calculate new angle 
 
         rise += Time.deltaTime * riseSpeed; // Calculate distance between revolutions
-        float scale = size * (1 - rise / height);
+        
+        if ( height == 0 )
+        {
+            this.transform.localScale = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            float scale = size * (1 - rise / height);
+            this.transform.localScale = new Vector3(scale, scale, scale);
+        }
 
-        this.transform.localScale = new Vector3(scale, scale, scale);
 
         expand = rise * expandSpeed; //radius 
 
