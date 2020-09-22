@@ -5,8 +5,8 @@ using UnityEngine;
 public class DirtDevil_controller : MonoBehaviour
 {
 
-    public float expandSpeed = .5f;
-    public float spinSpeed = -1;
+    public float expandSpeed = .5f; //cyclone width explansion rate 
+    public float spinSpeed = -1; 
     public float riseSpeed = 1;
     public float height = 2;
     public float theta = 0;
@@ -36,7 +36,7 @@ public class DirtDevil_controller : MonoBehaviour
         else
         {
             float scale = size * (1 - rise / height);
-            this.transform.localScale = new Vector3(scale, scale, scale);
+            this.transform.localScale = new Vector3(scale, scale, scale); //dirts will get smaller with rise sot they disappear 
         }
 
 
