@@ -10,10 +10,15 @@ public class Interactable_flightOfTheFirefly : Interactable
     private Vector3 startPosition;
     public Vector3 endPosition;
     public float t;
-    public float speed = 0.5f;
+    public float speed = 10.0f;
     private float startTime;
     private float flightDistance;
     private bool flightStarted = false;
+    public float transformFrequency = 1;
+    public float transformAmplitude = 0.25f;
+    public float transformPhase = 0;
+
+    Vector3 translate = Vector3.zero;
 
     enum FlightState { Forward, Reverse };
     FlightState flightState;
@@ -47,6 +52,19 @@ public class Interactable_flightOfTheFirefly : Interactable
                 flightState = FlightState.Forward;
             }
         }
+        if ( flightStarted==false )
+        {
+            float transformY = Mathf.Sin(Time.time * transformFrequency * speed + transformPhase) * transformAmplitude;
+            if (flightState == FlightState.Forward)
+            {
+                translate.Set(startPosition.x, startPosition.y + transformY, startPosition.z);
+            }
+            else
+            {
+                translate.Set(endPosition.x, endPosition.y + transformY, endPosition.z);
+            }
+            this.transform.localPosition = translate;
+        }
     }
 
     public override void HandleStart()
@@ -57,6 +75,7 @@ public class Interactable_flightOfTheFirefly : Interactable
 
         flightState = FlightState.Forward;
         startPosition = transform.position;
+   
 
         if (clip != null)
         {
@@ -108,31 +127,4 @@ public class Interactable_flightOfTheFirefly : Interactable
 
         UpdatePosition();
     }
-
-
-    /*
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        startTime = Time.time;
-        // Calculate the journey length.
-        flightDistance = Vector3.Distance(startPosition, endPosition);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Distance moved equals elapsed time times speed..
-        float distCovered = (Time.time - startTime) * speed;
-
-        // Fraction of journey completed equals current distance divided by total distance.
-        float fractionOfFlight = distCovered / flightDistance;
-
-        // Set our position as a fraction of the distance between the markers.
-        transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfFlight);
-
-    } 
-    
-    */
 }
